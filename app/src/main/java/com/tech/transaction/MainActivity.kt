@@ -2,6 +2,7 @@ package com.tech.transaction
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.tech.transaction.transactionInput.TransactionInputFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
