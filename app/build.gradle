@@ -22,6 +22,10 @@ android {
     }
 }
 
+ext {
+    mockitoVersion = '2.7.22'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
@@ -31,4 +35,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
+
+    // Local Unit Tests
+    testCompile "org.mockito:mockito-core:$mockitoVersion"
+
+    // Android Unit Tests
+    androidTestCompile "org.mockito:mockito-android:$mockitoVersion"
 }
