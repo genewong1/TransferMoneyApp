@@ -8,10 +8,11 @@ import android.view.ViewGroup
 import com.tech.transaction.R
 import com.tech.transaction.transactionInput.contract.TransactionInputContract
 import kotlinx.android.synthetic.main.fragment_transaction.*
+import javax.inject.Inject
 
 class TransactionInputFragment : Fragment(), TransactionInputContract.View {
-
-    private lateinit var presenter : TransactionInputContract.Presenter
+    @Inject
+    lateinit var presenter : TransactionInputContract.Presenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -22,9 +23,11 @@ class TransactionInputFragment : Fragment(), TransactionInputContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter = TransactionInputContract.Presenter.newInstance(
-                this
-        )
+        // Creates presenter
+        DaggerTransactionInputPresenterComponent.builder()
+                .transactionInputPresenterModule(TransactionInputPresenterModule(this))
+                .build()
+                .inject(this)
 
         setupBtnSubmitClickListener({strAmount ->
             presenter.onBtnSubmit(strAmount)
