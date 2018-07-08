@@ -1,9 +1,9 @@
 package com.tech.transaction.transactionInput.contract
 
 class TransactionInputPresenterImpl(
-        private val view: TransactionInputFragmentContract.View,
-        private val interactor: TransactionInputFragmentContract.Interactor
-): TransactionInputFragmentContract.Presenter {
+        private val view: TransactionInputContract.View
+): TransactionInputContract.Presenter {
+    private val interactor: TransactionInputContract.Interactor = TransactionInputInteractorImpl(this)
 
     override fun onTransferRequestComplete() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tech.transaction.R
-import com.tech.transaction.transactionInput.contract.TransactionInputFragmentContract
+import com.tech.transaction.transactionInput.contract.TransactionInputContract
 import kotlinx.android.synthetic.main.fragment_transaction.*
 
-class TransactionInputFragment : Fragment(), TransactionInputFragmentContract.View {
+class TransactionInputFragment : Fragment(), TransactionInputContract.View {
 
-    private lateinit var presenter : TransactionInputFragmentContract.Presenter
+    private lateinit var presenter : TransactionInputContract.Presenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -22,9 +22,8 @@ class TransactionInputFragment : Fragment(), TransactionInputFragmentContract.Vi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter = TransactionInputFragmentContract.Presenter.newInstance(
-                this,
-                TransactionInputFragmentContract.Interactor.newInstance(presenter)
+        presenter = TransactionInputContract.Presenter.newInstance(
+                this
         )
 
         setupBtnSubmitClickListener({strAmount ->

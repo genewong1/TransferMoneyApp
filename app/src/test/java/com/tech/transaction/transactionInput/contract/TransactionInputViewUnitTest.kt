@@ -7,9 +7,9 @@ import org.mockito.MockitoAnnotations
 class TransactionInputViewUnitTest {
 
     @Mock
-    private lateinit var presenter : TransactionInputFragmentContract.Presenter
+    private lateinit var presenter : TransactionInputContract.Presenter
 
-    private lateinit var view : TransactionInputFragmentContract.View
+    private lateinit var view : TransactionInputContract.View
 
     @Before
     public fun setup() {

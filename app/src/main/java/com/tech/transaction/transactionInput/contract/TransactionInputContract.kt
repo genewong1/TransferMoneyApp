@@ -4,7 +4,7 @@ import android.support.v4.app.FragmentManager
 import com.tech.transaction.entities.TransactionStatus.TransactionStatus
 import java.math.BigDecimal
 
-interface TransactionInputFragmentContract {
+interface TransactionInputContract {
     interface View {
         fun setupBtnSubmitClickListener(callback : (strAmount: String)->Unit)
     }
@@ -30,8 +30,8 @@ interface TransactionInputFragmentContract {
             /**
              * TODO use different way to solve.
              */
-            fun newInstance(view: View, interactor: Interactor): Presenter {
-                return TransactionInputPresenterImpl(view = view, interactor = interactor)
+            fun newInstance(view: View): Presenter {
+                return TransactionInputPresenterImpl(view = view)
             }
         }
     }
@@ -42,7 +42,7 @@ interface TransactionInputFragmentContract {
         fun goToTransactionResult(status: TransactionStatus)
 
         companion object {
-            fun newInstance(supportFragmentManager: FragmentManager): TransactionInputFragmentContract.Router{
+            fun newInstance(supportFragmentManager: FragmentManager): TransactionInputContract.Router{
                 return TransactionInputRouterImpl(supportFragmentManager)
             }
         }
