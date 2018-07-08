@@ -39,6 +39,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
 
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+
     // Dagger dependencies
     implementation "com.google.dagger:dagger:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
