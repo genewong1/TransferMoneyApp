@@ -1,9 +1,29 @@
 package com.tech.transaction.transactionInput.contract
 
-class TransactionInputPresenterImpl(
-        private val view: TransactionInputContract.View
-): TransactionInputContract.Presenter {
-    private val interactor: TransactionInputContract.Interactor = TransactionInputInteractorImpl(this)
+import com.tech.transaction.transactionInput.DaggerTransactionInputInteractorComponent
+import com.tech.transaction.transactionInput.TransactionInputInteractorModule
+import javax.inject.Inject
+
+class TransactionInputPresenterImpl: TransactionInputContract.Presenter {
+    private var view: TransactionInputContract.View
+
+    @Inject
+    lateinit var interactor: TransactionInputContract.Interactor
+
+    @Inject
+    constructor(view: TransactionInputContract.View) {
+        this.view = view
+    }
+
+    init {
+
+        // Creates interactor
+        DaggerTransactionInputInteractorComponent.builder()
+                .transactionInputInteractorModule(TransactionInputInteractorModule(this))
+                .build()
+                .inject(this)
+
+    }
 
     override fun onTransferRequestComplete() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
