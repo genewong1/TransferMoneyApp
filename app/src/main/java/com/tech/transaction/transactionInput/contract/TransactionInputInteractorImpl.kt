@@ -28,13 +28,13 @@ class TransactionInputInteractorImpl : TransactionInputContract.Interactor {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError {
-                    Log.e(TAG, "onError with network call")
+                    Log.e(TAG, "onError with network call - localizedMessage = ${it.localizedMessage}")
 
-                    // TODO output.onTransferRequestError()
+                    output.onTransferRequestError()
 
-                }.subscribe {
+                }.subscribe ({
                     output.onTransferRequestComplete()
-                }
+                }) { throwable -> Log.e(TAG, throwable.toString()) }
 
     }
 
