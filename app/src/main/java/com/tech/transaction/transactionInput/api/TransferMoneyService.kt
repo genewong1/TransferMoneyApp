@@ -1,12 +1,14 @@
 package com.tech.transaction.transactionInput.api
 
-import android.telecom.Call
-import retrofit2.http.GET
-import retrofit2.http.Path
+import com.tech.transaction.data.dto.out.TransferMoneyOutDto
+import com.tech.transaction.entities.TransactionStatus.TransferMoneyInDto
+import retrofit2.http.Body
+import retrofit2.http.POST
+import rx.Observable
 
 interface TransferMoneyService {
-    @GET("transfer")
+    @POST("transfer")
     fun sendMoney(
-            @Path("user") user: String
-    ): Call
+        @Body transferMoneyOutDto: TransferMoneyOutDto
+    ): Observable<TransferMoneyInDto>
 }
