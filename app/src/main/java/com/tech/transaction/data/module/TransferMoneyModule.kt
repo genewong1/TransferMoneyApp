@@ -26,7 +26,7 @@ class TransferMoneyModule {
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        val BASE_URL = ""
+        val BASE_URL = "https://genewong1.github.io/"
 
         return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
