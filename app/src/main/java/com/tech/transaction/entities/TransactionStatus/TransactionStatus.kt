@@ -1,28 +1,31 @@
 package com.tech.transaction.entities.TransactionStatus
 
-import com.google.gson.annotations.SerializedName
+import android.os.Parcel
+import com.tech.transaction.data.*
+import java.math.BigDecimal
 
 class TransactionStatus(
-        success: Boolean?,
-        amount: Int?,
-        statusDescription: String?
-) {
-    @SerializedName("success")
-    var success: Boolean? = null
+    var success: Boolean,
+    var amount: BigDecimal?
+) : KParcelable {
 
-    @SerializedName("amount")
-    var amount: Int? = null
+    constructor(p: Parcel) : this(
+        success = p.readBoolean(),
+        amount = p.readBigDecimal()
+    )
 
-    @SerializedName("status_description")
-    var statusDescription: String? = null
-
-    init {
-        this.success = success
-        this.amount = amount
-        this.statusDescription = statusDescription
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeBoolean(success)
+        dest.writeBigDecimal(amount)
     }
 
     override fun toString(): String {
-        return "TransactionStatus(success=$success, amount=$amount, statusDescription=$statusDescription)"
+        return "TransactionStatus(success=$success, amount=$amount)"
     }
+
+    companion object {
+        @JvmField
+        val CREATOR = parcelableCreator(::TransactionStatus)
+    }
+
 }
