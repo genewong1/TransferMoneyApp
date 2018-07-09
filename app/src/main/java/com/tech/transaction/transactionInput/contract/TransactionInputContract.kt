@@ -21,6 +21,7 @@ interface TransactionInputContract {
 
     interface InteractorOutput {
         fun onTransferRequestComplete()
+        fun onTransferRequestError()
     }
 
     interface Presenter : InteractorOutput {
