@@ -27,6 +27,7 @@ android {
 ext {
     mockitoVersion = '2.7.22'
     daggerVersion='2.12'
+    retrofitVersion='2.4.0'
 }
 
 dependencies {
@@ -40,10 +41,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
 
     // Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.2.0'
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
 
     // Dagger dependencies
     implementation "com.google.dagger:dagger:$daggerVersion"
