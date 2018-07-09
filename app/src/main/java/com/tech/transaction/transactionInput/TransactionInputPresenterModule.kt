@@ -7,10 +7,14 @@ import dagger.Provides
 
 @Module
 class TransactionInputPresenterModule {
+
     val view : TransactionInputContract.View
 
-    constructor(view: TransactionInputContract.View) {
+    val router: TransactionInputContract.Router
+
+    constructor(view: TransactionInputContract.View, router: TransactionInputContract.Router) {
         this.view = view
+        this.router = router
     }
 
     @Provides
@@ -19,7 +23,12 @@ class TransactionInputPresenterModule {
     }
 
     @Provides
+    fun provideRouter(): TransactionInputContract.Router {
+        return router
+    }
+
+    @Provides
     fun provideTransactionInputContractPresenter(): TransactionInputContract.Presenter {
-        return TransactionInputPresenterImpl(view)
+        return TransactionInputPresenterImpl(view, router)
     }
 }
