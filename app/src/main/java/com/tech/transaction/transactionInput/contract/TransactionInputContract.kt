@@ -39,7 +39,7 @@ interface TransactionInputContract {
     interface Entity
 
     interface Router {
-        fun goToTransactionResult(status: TransactionStatus)
+        fun goToTransactionResult(transactionStatus: TransactionStatus)
 
         companion object {
             fun newInstance(supportFragmentManager: FragmentManager): TransactionInputContract.Router{
