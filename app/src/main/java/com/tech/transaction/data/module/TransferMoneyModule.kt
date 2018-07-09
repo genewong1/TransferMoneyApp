@@ -2,6 +2,7 @@ package com.tech.transaction.data.module
 
 import android.app.Application
 import com.tech.transaction.transactionInput.api.TransferMoneyService
+import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -9,7 +10,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-
+@Module
 class TransferMoneyModule {
     var application: Application? = null
 
