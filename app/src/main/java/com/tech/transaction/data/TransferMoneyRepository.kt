@@ -1,7 +1,7 @@
 package com.tech.transaction.data
 
 import com.tech.transaction.data.dto.TransferMoneyOutDtoFactory
-import com.tech.transaction.entities.TransactionStatus.TransferMoneyInDto
+import com.tech.transaction.data.dto.`in`.TransferMoneyInDto
 import com.tech.transaction.transactionInput.api.TransferMoneyService
 import rx.Observable
 import java.math.BigDecimal
