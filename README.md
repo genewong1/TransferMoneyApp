@@ -1,32 +1,34 @@
 # Task: Transfer Money App
 
-## One input screen
+## Screens
+
+### One input screen
 
 - An amount input field
 
 - A submit button
 ·         One dummy API call for the transfer function (could be a static JSON file hosted on internet)
 ·         One results screen
-
-· One Transfer status screen
+ 
+### One Transfer status screen
 
 - Shows the transfer status
 
 
 ## Screenshots
 
-!Empty Amount 
+1. Empty Amount 
 (https://github.com/genewong1/TransferMoneyApp/blob/master/screenshots/amount_empty.png)
 
-!Typing amount with onscreen keyboard (https://github.com/genewong1/TransferMoneyApp/blob/master/screenshots/typing_amount.png)
+2. Typing amount with onscreen keyboard (https://github.com/genewong1/TransferMoneyApp/blob/master/screenshots/typing_amount.png)
 
-!Amount Entered 
+3. Amount Entered 
 (https://github.com/genewong1/TransferMoneyApp/blob/master/screenshots/amount_entered.png)
 
-!Transaction Successful 
+4. Transaction Successful 
 (https://github.com/genewong1/TransferMoneyApp/blob/master/screenshots/transaction_successful.png)
 
-!Transaction Unsuccessful 
+5. Transaction Unsuccessful 
 (https://github.com/genewong1/TransferMoneyApp/blob/master/screenshots/transaction_unsuccessful.png)
 
 
