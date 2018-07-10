@@ -30,11 +30,11 @@ class TransferMoneyModule {
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
 
         //Subject to checking every 24 hours to ensure that it remains.
-        val BASE_URL = "http://www.mocky.io/v2/5b4422832f0000640058354d/"
+        val baseUrl = "http://www.mocky.io/v2/5b44ba0e2f00007000420a35/"
 
         return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(BASE_URL)
+                .baseUrl(baseUrl)
                 .client(okHttpClient)
                 //converts Retrofit response into Observable
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
