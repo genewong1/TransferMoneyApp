@@ -1,6 +1,6 @@
 # Task: Transfer Money App
 
-· One input screen
+## One input screen
 
 - An amount input field
 
@@ -13,7 +13,7 @@
 - Shows the transfer status
 
 
-. Screenshots
+## Screenshots
 
 !Empty Amount 
 (https://github.com/genewong1/TransferMoneyApp/blob/master/screenshots/amount_empty.png)
@@ -29,7 +29,8 @@
 !Transaction Unsuccessful 
 (https://github.com/genewong1/TransferMoneyApp/blob/master/screenshots/transaction_unsuccessful.png)
 
-. Third Party Libraries
+
+## Third Party Libraries
 
 1. Dagger2 - Dependency injection.
 2. RxAndroid, RxJava - Make API calls reactive.
