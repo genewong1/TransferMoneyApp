@@ -1,10 +1,11 @@
 package com.tech.transaction.transactionResult.contract
 
+import android.support.annotation.StringRes
 import com.tech.transaction.entities.TransactionStatus.TransactionStatus
 
 interface TransactionResultContract {
     interface View {
-        fun showStatus(statusString: String)
+        fun showStatus(@StringRes statusStringResId: Int)
     }
 
     interface Interactor {
@@ -16,8 +17,6 @@ interface TransactionResultContract {
     }
 
     interface InteractorOutput {
-        fun onDisplayStatus(statusString: String)
+        fun onDisplayStatus(@StringRes statusStringResId: Int)
     }
-
-    interface Router
 }
