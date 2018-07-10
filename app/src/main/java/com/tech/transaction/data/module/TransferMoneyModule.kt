@@ -28,7 +28,9 @@ class TransferMoneyModule {
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        val BASE_URL = "https://genewong1.github.io/"
+
+        //Subject to checking every 24 hours to ensure that it remains.
+        val BASE_URL = "http://www.mocky.io/v2/5b4422832f0000640058354d/"
 
         return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
