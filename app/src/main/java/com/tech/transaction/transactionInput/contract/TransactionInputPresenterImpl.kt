@@ -1,7 +1,8 @@
 package com.tech.transaction.transactionInput.contract
 
-import com.tech.transaction.transactionInput.DaggerTransactionInputInteractorComponent
-import com.tech.transaction.transactionInput.TransactionInputInteractorModule
+import com.tech.transaction.entities.TransactionStatus.TransactionStatus
+import com.tech.transaction.transactionInput.component.DaggerTransactionInputInteractorComponent
+import com.tech.transaction.transactionInput.module.TransactionInputInteractorModule
 import com.tech.transaction.typeConversion.parseCurrencyString
 import javax.inject.Inject
 
@@ -20,7 +21,7 @@ class TransactionInputPresenterImpl: TransactionInputContract.Presenter {
 
     init {
 
-        // Creates interactor
+        // Inject interactor
         DaggerTransactionInputInteractorComponent.builder()
                 .transactionInputInteractorModule(TransactionInputInteractorModule(this))
                 .build()
@@ -28,12 +29,12 @@ class TransactionInputPresenterImpl: TransactionInputContract.Presenter {
 
     }
 
-    override fun onTransferRequestComplete() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onTransferRequestComplete(transactionStatus: TransactionStatus) {
+        router.goToTransactionResult(transactionStatus = transactionStatus)
     }
 
-    override fun onTransferRequestError() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onTransferRequestError(transactionStatus: TransactionStatus) {
+        router.goToTransactionResult(transactionStatus = transactionStatus)
     }
 
     override fun onBtnSubmit(amount: String) {
