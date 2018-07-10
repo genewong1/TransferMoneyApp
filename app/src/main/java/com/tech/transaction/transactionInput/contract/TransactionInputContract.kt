@@ -20,8 +20,8 @@ interface TransactionInputContract {
     }
 
     interface InteractorOutput {
-        fun onTransferRequestComplete()
-        fun onTransferRequestError()
+        fun onTransferRequestComplete(transactionStatus: TransactionStatus)
+        fun onTransferRequestError(transactionStatus: TransactionStatus)
     }
 
     interface Presenter : InteractorOutput {
@@ -43,7 +43,7 @@ interface TransactionInputContract {
         fun goToTransactionResult(transactionStatus: TransactionStatus)
 
         companion object {
-            fun newInstance(supportFragmentManager: FragmentManager?): TransactionInputContract.Router{
+            fun newInstance(supportFragmentManager: FragmentManager): TransactionInputContract.Router{
                 return TransactionInputRouterImpl(supportFragmentManager)
             }
         }
