@@ -3,6 +3,7 @@ package com.tech.transaction.transactionInput.contract
 import android.util.Log
 import com.tech.transaction.application.TransferMoneyApp
 import com.tech.transaction.data.TransferMoneyRepository
+import com.tech.transaction.entities.TransactionStatus.TransactionStatus
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import java.math.BigDecimal
@@ -29,12 +30,16 @@ class TransactionInputInteractorImpl : TransactionInputContract.Interactor {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError {
                     Log.e(TAG, "onError with network call - localizedMessage = ${it.localizedMessage}")
+                }.subscribe ({transferMoneyInDto ->
+                    output.onTransferRequestComplete(TransactionStatus(
+                            success = transferMoneyInDto.success ?: false,
+                            amount = amount
+                    ))
+                }) { throwable ->
+                    Log.e(TAG, throwable.toString())
 
-                    output.onTransferRequestError()
-
-                }.subscribe ({
-                    output.onTransferRequestComplete()
-                }) { throwable -> Log.e(TAG, throwable.toString()) }
+                    output.onTransferRequestError(TransactionStatus(success = false, amount = amount))
+                }
 
     }
 
