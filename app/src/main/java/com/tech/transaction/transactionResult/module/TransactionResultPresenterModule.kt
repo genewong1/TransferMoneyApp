@@ -1,6 +1,7 @@
-package com.tech.transaction.transactionResult
+package com.tech.transaction.transactionResult.module
 
 import com.tech.transaction.transactionResult.contract.TransactionResultContract
+import com.tech.transaction.transactionResult.contract.TransactionResultPresenterImpl
 import dagger.Module
 import dagger.Provides
 
@@ -17,4 +18,8 @@ class TransactionResultPresenterModule {
         return view
     }
 
+    @Provides
+    fun provideTransactionResultPresenter(): TransactionResultContract.Presenter {
+        return TransactionResultPresenterImpl(view)
+    }
 }
