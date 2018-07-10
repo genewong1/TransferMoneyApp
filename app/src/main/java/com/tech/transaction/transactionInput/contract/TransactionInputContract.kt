@@ -31,8 +31,8 @@ interface TransactionInputContract {
             /**
              * TODO use different way to solve.
              */
-            fun newInstance(view: View): Presenter {
-                return TransactionInputPresenterImpl(view = view)
+            fun newInstance(view: View, router: Router): Presenter {
+                return TransactionInputPresenterImpl(view = view, router = router)
             }
         }
     }
@@ -43,7 +43,7 @@ interface TransactionInputContract {
         fun goToTransactionResult(transactionStatus: TransactionStatus)
 
         companion object {
-            fun newInstance(supportFragmentManager: FragmentManager): TransactionInputContract.Router{
+            fun newInstance(supportFragmentManager: FragmentManager?): TransactionInputContract.Router{
                 return TransactionInputRouterImpl(supportFragmentManager)
             }
         }
