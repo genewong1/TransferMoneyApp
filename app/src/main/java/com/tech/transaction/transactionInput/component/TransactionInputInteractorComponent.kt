@@ -1,6 +1,7 @@
-package com.tech.transaction.transactionInput
+package com.tech.transaction.transactionInput.component
 
 import com.tech.transaction.transactionInput.contract.TransactionInputPresenterImpl
+import com.tech.transaction.transactionInput.module.TransactionInputInteractorModule
 import dagger.Component
 
 @Component(modules = [
