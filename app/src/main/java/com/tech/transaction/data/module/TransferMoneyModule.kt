@@ -1,6 +1,5 @@
 package com.tech.transaction.data.module
 
-import android.app.Application
 import com.tech.transaction.transactionInput.api.TransferMoneyService
 import dagger.Module
 import dagger.Provides
@@ -14,11 +13,6 @@ import javax.inject.Singleton
 
 @Module
 class TransferMoneyModule {
-    var application: Application? = null
-
-    constructor(application: Application) {
-        this.application = application
-    }
 
     @Provides
     fun provideTransferMoneyService(retrofit: Retrofit) : TransferMoneyService {

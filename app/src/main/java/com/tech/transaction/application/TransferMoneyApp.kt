@@ -22,7 +22,7 @@ class TransferMoneyApp : Application() {
 
     private fun initDataComponent() {
         transferMoneyComponent = DaggerTransferMoneyComponent.builder()
-                .transferMoneyModule(TransferMoneyModule(this))
+                .transferMoneyModule(TransferMoneyModule())
                 .build()
     }
 
