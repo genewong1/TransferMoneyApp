@@ -5,9 +5,11 @@ import com.tech.transaction.transactionInput.api.TransferMoneyService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -40,7 +42,26 @@ class TransferMoneyModule {
     @Provides
     @Singleton
     fun provideHttpClient(): OkHttpClient {
-        return OkHttpClient().newBuilder().build()
+
+        val connectTimeout: Long = 5
+        val readTimeout: Long = 5
+        val writeTimeout: Long = 5
+        val timeoutUnit: TimeUnit = TimeUnit.SECONDS
+
+        val okClientBuilder = OkHttpClient().newBuilder()
+
+        //Create logging interceptor
+        val interceptor = HttpLoggingInterceptor()
+
+        //Set interceptor logging level.
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        okClientBuilder.addInterceptor(interceptor)
+
+        okClientBuilder.connectTimeout(connectTimeout, timeoutUnit)
+        okClientBuilder.readTimeout(readTimeout, timeoutUnit)
+        okClientBuilder.writeTimeout(writeTimeout, timeoutUnit)
+
+        return okClientBuilder.build()
     }
 
 }
