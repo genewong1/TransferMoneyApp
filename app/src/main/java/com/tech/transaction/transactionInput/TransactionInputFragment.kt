@@ -7,12 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import com.tech.transaction.R
 import com.tech.transaction.transactionInput.contract.TransactionInputContract
+import com.tech.transaction.transactionInput.contract.TransactionInputRouterImpl
 import kotlinx.android.synthetic.main.fragment_transaction.*
 import javax.inject.Inject
 
 class TransactionInputFragment : Fragment(), TransactionInputContract.View {
     @Inject
     lateinit var presenter : TransactionInputContract.Presenter
+
+    lateinit var router : TransactionInputContract.Router
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -23,13 +26,18 @@ class TransactionInputFragment : Fragment(), TransactionInputContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        router = TransactionInputRouterImpl(this.fragmentManager!!)
+
         // Creates presenter
         DaggerTransactionInputPresenterComponent.builder()
-                .transactionInputPresenterModule(TransactionInputPresenterModule(this))
+                .transactionInputPresenterModule(TransactionInputPresenterModule(
+                        view = this,
+                        router = router
+                ))
                 .build()
                 .inject(this)
 
-        setupBtnSubmitClickListener({strAmount ->
+        setupBtnSubmitClickListener({ strAmount ->
             presenter.onBtnSubmit(strAmount)
         })
     }
@@ -39,4 +47,5 @@ class TransactionInputFragment : Fragment(), TransactionInputContract.View {
             callback(etAmount.text.toString())
         }
     }
+
 }
