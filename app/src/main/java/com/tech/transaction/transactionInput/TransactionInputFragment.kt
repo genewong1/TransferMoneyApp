@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tech.transaction.R
+import com.tech.transaction.transactionInput.component.DaggerTransactionInputPresenterComponent
 import com.tech.transaction.transactionInput.contract.TransactionInputContract
 import com.tech.transaction.transactionInput.contract.TransactionInputRouterImpl
+import com.tech.transaction.transactionInput.module.TransactionInputPresenterModule
 import kotlinx.android.synthetic.main.fragment_transaction.*
 import javax.inject.Inject
 
@@ -26,14 +28,16 @@ class TransactionInputFragment : Fragment(), TransactionInputContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        router = TransactionInputRouterImpl(this.fragmentManager!!)
+        router = TransactionInputRouterImpl(this.activity?.supportFragmentManager!!)
 
         // Creates presenter
         DaggerTransactionInputPresenterComponent.builder()
-                .transactionInputPresenterModule(TransactionInputPresenterModule(
-                        view = this,
-                        router = router
-                ))
+                .transactionInputPresenterModule(
+                        TransactionInputPresenterModule(
+                                view = this,
+                                router = router
+                        )
+                )
                 .build()
                 .inject(this)
 
