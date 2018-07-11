@@ -51,6 +51,14 @@ class InputFragment : Fragment(), InputContract.View {
                     }
                     override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                         presenter.onEtAmountFieldChanged(p0.toString())
+
+                        //Close InputConnection.
+                        //If not, causes
+                        // java.lang.NullPointerException:
+                        // Attempt to invoke interface method
+                        // 'void android.view.inputmethod.InputConnection.closeConnection()'
+                        // on a null object reference
+                        etAmount?.clearFocus()
                     }
                 }
         )
