@@ -10,16 +10,12 @@ import rx.schedulers.Schedulers
 import java.math.BigDecimal
 import javax.inject.Inject
 
-class InputInteractorImpl : InputContract.Interactor {
-    private var output: InputContract.InteractorOutput
+class InputInteractorImpl @Inject constructor(
+        private var output: InputContract.InteractorOutput
+) : InputContract.Interactor {
 
     @Inject
     protected lateinit var repository: TransferMoneyRepository
-
-    @Inject
-    constructor (output: InputContract.InteractorOutput) {
-        this.output = output
-    }
 
     init {
         DaggerTransferMoneyComponent
