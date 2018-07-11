@@ -37,8 +37,6 @@ interface InputContract {
         }
     }
 
-    interface Entity
-
     interface Router {
         fun goToTransactionResult(transferMoneyStatus: TransferMoneyStatus)
 
