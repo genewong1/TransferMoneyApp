@@ -52,4 +52,7 @@ class InputFragment : Fragment(), InputContract.View {
         }
     }
 
+    override fun enableBtnSubmit(enable: Boolean) {
+        btnSubmit.isEnabled = enable
+    }
 }
