@@ -9,13 +9,7 @@ import javax.inject.Inject
 
 
 
-class TransferMoneyRepository {
-    private var service: TransferMoneyService
-
-    @Inject
-    constructor(service: TransferMoneyService) {
-        this.service = service
-    }
+class TransferMoneyRepository @Inject constructor(private var service: TransferMoneyService) {
 
     fun transferMoney(amount: BigDecimal): Observable<TransferMoneyInDto> {
         val factory = TransferMoneyOutDtoFactory()
