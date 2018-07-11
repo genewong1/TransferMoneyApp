@@ -6,18 +6,10 @@ import com.tech.transaction.transferMoneyInput.module.InputInteractorModule
 import com.tech.transaction.typeConversion.parseCurrencyString
 import javax.inject.Inject
 
-class InputPresenterImpl: InputContract.Presenter {
-    private var view: InputContract.View
-    private var router: InputContract.Router
+class InputPresenterImpl @Inject constructor(private var view: InputContract.View, private var router: InputContract.Router) : InputContract.Presenter {
 
     @Inject
     lateinit var interactor: InputContract.Interactor
-
-    @Inject
-    constructor(view: InputContract.View, router: InputContract.Router) {
-        this.view = view
-        this.router = router
-    }
 
     init {
 
