@@ -48,6 +48,14 @@ class InputInteractorImpl : InputContract.Interactor {
 
     }
 
+    override fun isAmountInputValid(amount: String) {
+        if (amount.isNullOrBlank() || BigDecimal(amount) <= BigDecimal.ZERO) {
+            output.onAmountInputInvalid()
+        } else {
+            output.onAmountInputValid()
+        }
+    }
+
     companion object {
         private val TAG = InputInteractorImpl::class.java.simpleName
     }
