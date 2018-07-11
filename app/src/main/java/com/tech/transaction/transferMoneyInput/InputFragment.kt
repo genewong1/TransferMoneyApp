@@ -34,7 +34,7 @@ class InputFragment : Fragment(), InputContract.View {
 
         // Creates presenter
         DaggerInputPresenterComponent.builder()
-                .transactionInputPresenterModule(
+                .inputPresenterModule(
                         InputPresenterModule(
                                 view = this,
                                 router = router

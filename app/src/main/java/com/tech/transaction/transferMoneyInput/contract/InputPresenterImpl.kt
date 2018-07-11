@@ -23,7 +23,7 @@ class InputPresenterImpl: InputContract.Presenter {
 
         // Inject interactor
         DaggerInputInteractorComponent.builder()
-                .InputInteractorModule(InputInteractorModule(this))
+                .inputInteractorModule(InputInteractorModule(this))
                 .build()
                 .inject(this)
 

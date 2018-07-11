@@ -15,7 +15,7 @@ class ResultPresenterImpl(
 
     init {
         DaggerResultInteractorComponent.builder()
-                .transactionResultInteractorModule(ResultInteractorModule(this))
+                .resultInteractorModule(ResultInteractorModule(this))
                 .build()
                 .inject(this)
     }

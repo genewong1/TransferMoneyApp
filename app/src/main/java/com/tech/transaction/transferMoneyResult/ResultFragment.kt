@@ -32,7 +32,7 @@ class ResultFragment : Fragment(), ResultContract.View {
                 ?: throw IllegalArgumentException("Parcelable KEY_TRANSACTION_STATUS expected")
 
         DaggerResultComponent.builder()
-                .transactionResultPresenterModule(
+                .resultPresenterModule(
                         ResultPresenterModule(this)
                 )
                 .build()
