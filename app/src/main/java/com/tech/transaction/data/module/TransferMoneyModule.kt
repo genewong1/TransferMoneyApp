@@ -1,6 +1,6 @@
 package com.tech.transaction.data.module
 
-import com.tech.transaction.transactionInput.api.TransferMoneyService
+import com.tech.transaction.transferMoneyInput.api.TransferMoneyService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
