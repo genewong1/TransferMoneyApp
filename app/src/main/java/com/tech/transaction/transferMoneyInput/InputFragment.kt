@@ -2,6 +2,8 @@ package com.tech.transaction.transferMoneyInput
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,9 +43,23 @@ class InputFragment : Fragment(), InputContract.View {
                 .build()
                 .inject(this)
 
+        etAmount.addTextChangedListener(
+                object: TextWatcher {
+                    override fun afterTextChanged(p0: Editable?) {
+                    }
+                    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    }
+                    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                        presenter.onEtAmountFieldChanged(p0.toString())
+                    }
+                }
+        )
+
         setupBtnSubmitClickListener({ strAmount ->
             presenter.onBtnSubmit(strAmount)
         })
+
+
     }
 
     override fun setupBtnSubmitClickListener(callback : (strAmount: String)->Unit) {
