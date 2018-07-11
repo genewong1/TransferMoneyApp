@@ -58,7 +58,6 @@ class InputFragment : Fragment(), InputContract.View {
                         // Attempt to invoke interface method
                         // 'void android.view.inputmethod.InputConnection.closeConnection()'
                         // on a null object reference
-                        etAmount?.clearFocus()
                     }
                 }
         )
@@ -67,6 +66,9 @@ class InputFragment : Fragment(), InputContract.View {
 
         setupBtnSubmitClickListener({ strAmount ->
             btnSubmit.isEnabled = false
+
+            //add etAmount?.clearFocus() to fix InputConnectionWrapper.closeConnection() issue.
+            etAmount?.clearFocus()
             presenter.onBtnSubmit(strAmount)
         })
 
@@ -80,5 +82,12 @@ class InputFragment : Fragment(), InputContract.View {
 
     override fun enableBtnSubmit(enable: Boolean) {
         btnSubmit.isEnabled = enable
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        //add etAmount?.clearFocus() to fix InputConnectionWrapper.closeConnection() issue.
+        etAmount?.clearFocus()
     }
 }
