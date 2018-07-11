@@ -45,11 +45,10 @@ class InputInteractorImpl : InputContract.Interactor {
 
                     output.onTransferRequestError(TransferMoneyStatus(success = false, amount = amount))
                 }
-
     }
 
     override fun isAmountInputValid(amount: String) {
-        if (amount.isNullOrBlank() || BigDecimal(amount) <= BigDecimal.ZERO) {
+        if (amount.isBlank() || BigDecimal(amount) <= BigDecimal.ZERO) {
             output.onAmountInputInvalid()
         } else {
             output.onAmountInputValid()
