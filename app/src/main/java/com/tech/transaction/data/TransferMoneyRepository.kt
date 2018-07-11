@@ -2,20 +2,14 @@ package com.tech.transaction.data
 
 import com.tech.transaction.data.dto.TransferMoneyOutDtoFactory
 import com.tech.transaction.data.dto.`in`.TransferMoneyInDto
-import com.tech.transaction.transactionInput.api.TransferMoneyService
+import com.tech.transaction.transferMoneyInput.api.TransferMoneyService
 import rx.Observable
 import java.math.BigDecimal
 import javax.inject.Inject
 
 
 
-class TransferMoneyRepository {
-    private var service: TransferMoneyService
-
-    @Inject
-    constructor(service: TransferMoneyService) {
-        this.service = service
-    }
+class TransferMoneyRepository @Inject constructor(private var service: TransferMoneyService) {
 
     fun transferMoney(amount: BigDecimal): Observable<TransferMoneyInDto> {
         val factory = TransferMoneyOutDtoFactory()
