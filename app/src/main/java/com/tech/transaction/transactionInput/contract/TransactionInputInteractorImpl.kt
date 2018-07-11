@@ -1,8 +1,9 @@
 package com.tech.transaction.transactionInput.contract
 
 import android.util.Log
-import com.tech.transaction.application.TransferMoneyApp
+import com.tech.transaction.data.DaggerTransferMoneyComponent
 import com.tech.transaction.data.TransferMoneyRepository
+import com.tech.transaction.data.module.TransferMoneyModule
 import com.tech.transaction.entities.TransactionStatus.TransactionStatus
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -21,7 +22,11 @@ class TransactionInputInteractorImpl : TransactionInputContract.Interactor {
     }
 
     init {
-        TransferMoneyApp.app?.get()?.transferMoneyComponent?.inject(this@TransactionInputInteractorImpl)
+        DaggerTransferMoneyComponent
+                .builder()
+                .transferMoneyModule(TransferMoneyModule())
+                .build()
+                .inject(this@TransactionInputInteractorImpl)
     }
 
     override fun initiateTransaction(amount: BigDecimal) {

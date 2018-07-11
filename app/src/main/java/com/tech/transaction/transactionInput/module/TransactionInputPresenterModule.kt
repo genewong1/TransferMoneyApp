@@ -10,7 +10,7 @@ class TransactionInputPresenterModule {
 
     val view : TransactionInputContract.View
 
-    val router: TransactionInputContract.Router
+    private val router: TransactionInputContract.Router
 
     constructor(view: TransactionInputContract.View, router: TransactionInputContract.Router) {
         this.view = view
