@@ -40,4 +40,16 @@ class InputPresenterImpl: InputContract.Presenter {
     override fun onBtnSubmit(amount: String) {
         interactor.initiateTransaction(amount = amount.parseCurrencyString())
     }
+
+    override fun onAmountInputValid() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onAmountInputInvalid() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onEtAmountFieldChanged(amount: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }
