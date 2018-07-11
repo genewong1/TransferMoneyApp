@@ -23,7 +23,7 @@ class InputPresenterImpl: InputContract.Presenter {
 
         // Inject interactor
         DaggerInputInteractorComponent.builder()
-                .transactionInputInteractorModule(InputInteractorModule(this))
+                .InputInteractorModule(InputInteractorModule(this))
                 .build()
                 .inject(this)
 
@@ -42,14 +42,14 @@ class InputPresenterImpl: InputContract.Presenter {
     }
 
     override fun onAmountInputValid() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        view.enableBtnSubmit(true)
     }
 
     override fun onAmountInputInvalid() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        view.enableBtnSubmit(false)
     }
 
     override fun onEtAmountFieldChanged(amount: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        interactor.isAmountInputValid(amount)
     }
 }
