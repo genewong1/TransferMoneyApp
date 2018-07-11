@@ -55,10 +55,12 @@ class InputFragment : Fragment(), InputContract.View {
                 }
         )
 
+        btnSubmit.isEnabled = true
+
         setupBtnSubmitClickListener({ strAmount ->
+            btnSubmit.isEnabled = false
             presenter.onBtnSubmit(strAmount)
         })
-
 
     }
 
