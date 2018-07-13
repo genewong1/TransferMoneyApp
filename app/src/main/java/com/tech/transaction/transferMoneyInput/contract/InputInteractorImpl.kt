@@ -8,6 +8,7 @@ import com.tech.transaction.entities.TransferMoneyStatus.TransferMoneyStatus
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import java.math.BigDecimal
+import java.math.BigInteger
 import javax.inject.Inject
 
 class InputInteractorImpl @Inject constructor(
@@ -25,8 +26,8 @@ class InputInteractorImpl @Inject constructor(
                 .inject(this@InputInteractorImpl)
     }
 
-    override fun initiateTransaction(amount: BigDecimal) {
-        repository.transferMoney(amount)
+    override fun initiateTransaction(receivingAccountNumber: BigInteger, amount: BigDecimal) {
+        repository.transferMoney(receivingAccountNumber, amount)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError {

@@ -2,6 +2,7 @@ package com.tech.transaction.transferMoneyInput.contract
 
 import com.tech.transaction.entities.TransferMoneyStatus.TransferMoneyStatus
 import java.math.BigDecimal
+import java.math.BigInteger
 
 interface InputContract {
     interface View {
@@ -11,7 +12,7 @@ interface InputContract {
     }
 
     interface Interactor {
-        fun initiateTransaction(amount: BigDecimal)
+        fun initiateTransaction(receivingAccountNumber: BigInteger, amount: BigDecimal)
         fun isAmountInputValid(amount: String)
     }
 
@@ -29,7 +30,7 @@ interface InputContract {
 
     interface Presenter : InteractorOutput {
         fun onEtAmountFieldChanged(amount: String)
-        fun onBtnSubmit(amount: String)
+        fun onBtnSubmit(receivingAccountNumber: BigInteger, amount: String)
     }
 
     interface Router {

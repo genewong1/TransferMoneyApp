@@ -71,8 +71,9 @@ class TransactionInputInteractorUnitTest {
     fun initiateTransaction_ValidAmount() {
         interactor = InputInteractorImpl(output)
 
+        val receivingAccountNumber = 1233
         val amount = "320"
-        interactor.initiateTransaction(BigDecimal(amount))
+        interactor.initiateTransaction(receivingAccountNumber, BigDecimal(amount))
 
         verify(output, times(1))
         .onTransferRequestComplete(transferMoneyStatus =
