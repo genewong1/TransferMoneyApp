@@ -5,7 +5,6 @@ import com.tech.transaction.entities.TransferMoneyStatus.TransferMoneyStatus
 import com.tech.transaction.transferMoneyInput.component.DaggerInputInteractorComponent
 import com.tech.transaction.transferMoneyInput.module.InputInteractorModule
 import com.tech.transaction.typeConversion.parseCurrencyString
-import java.math.BigInteger
 import javax.inject.Inject
 
 class InputPresenterImpl @Inject constructor(private var view: InputContract.View, private var router: InputContract.Router) : InputContract.Presenter {
@@ -39,8 +38,11 @@ class InputPresenterImpl @Inject constructor(private var view: InputContract.Vie
         router.goToTransactionResult(transferMoneyStatus = transferMoneyStatus)
     }
 
-    override fun onBtnSubmit(receivingAccountNumber: BigInteger, amount: String) {
-        interactor.initiateTransaction(receivingAccountNumber = receivingAccountNumber, amount = amount.parseCurrencyString())
+    override fun onBtnSubmit(receivingAccountNumber: String, amount: String) {
+        interactor.initiateTransaction(
+                receivingAccountNumber = receivingAccountNumber.toBigInteger(),
+                amount = amount.parseCurrencyString()
+        )
     }
 
     override fun onAmountInputValid() {

@@ -6,8 +6,7 @@ import java.math.BigInteger
 
 interface InputContract {
     interface View {
-        fun setupBtnSubmitClickListener(callback : (strAmount: String)->Unit)
-
+        fun setupBtnSubmitClickListener(callback : (receiverAccountNumber: String, strAmount: String)->Unit)
         fun enableBtnSubmit(enable: Boolean)
     }
 
@@ -30,7 +29,7 @@ interface InputContract {
 
     interface Presenter : InteractorOutput {
         fun onEtAmountFieldChanged(amount: String)
-        fun onBtnSubmit(receivingAccountNumber: BigInteger, amount: String)
+        fun onBtnSubmit(receivingAccountNumber: String, amount: String)
     }
 
     interface Router {
