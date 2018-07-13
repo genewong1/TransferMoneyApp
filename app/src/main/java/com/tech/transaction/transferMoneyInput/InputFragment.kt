@@ -64,19 +64,19 @@ class InputFragment : Fragment(), InputContract.View {
 
         btnSubmit.isEnabled = true
 
-        setupBtnSubmitClickListener({ strAmount ->
+        setupBtnSubmitClickListener({receiverAccountNumber, strAmount ->
             btnSubmit.isEnabled = false
 
             //add etAmount?.clearFocus() to fix InputConnectionWrapper.closeConnection() issue.
             etAmount?.clearFocus()
-            presenter.onBtnSubmit(strAmount)
+            presenter.onBtnSubmit(receiverAccountNumber, strAmount)
         })
 
     }
 
-    override fun setupBtnSubmitClickListener(callback : (strAmount: String)->Unit) {
+    override fun setupBtnSubmitClickListener(callback : (receiverAccountNumber: String, strAmount: String)->Unit) {
         btnSubmit.setOnClickListener {
-            callback(etAmount.text.toString())
+            callback(etReceiverAccountNumber.text.toString(), etAmount.text.toString())
         }
     }
 
