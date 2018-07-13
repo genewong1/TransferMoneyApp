@@ -8,6 +8,7 @@ import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import java.math.BigDecimal
+import java.math.BigInteger
 
 class TransactionInputInteractorUnitTest {
 
@@ -71,7 +72,7 @@ class TransactionInputInteractorUnitTest {
     fun initiateTransaction_ValidAmount() {
         interactor = InputInteractorImpl(output)
 
-        val receivingAccountNumber = 1233
+        val receivingAccountNumber: BigInteger = BigInteger("1233")
         val amount = "320"
         interactor.initiateTransaction(receivingAccountNumber, BigDecimal(amount))
 
