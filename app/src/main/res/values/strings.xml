@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Transfer Money</string>
-    <string name="Amount">Amount</string>
+    <string name="Amount">Amount*</string>
     <string name="Submit">Submit</string>
-    <string name="Transaction_Successful">Transaction Successful</string>
-    <string name="Transaction_Unsuccessful">Transaction Unsuccessful</string>
-    <string name="Receiver_Account_Number">Receiver Account Number</string>
+    <string name="Transaction_Successful">Transaction Successful.</string>
+    <string name="Transaction_Unsuccessful">Transaction Unsuccessful.</string>
+    <string name="Receiver_Account_Number">Receiver Account Number*</string>
 </resources>
