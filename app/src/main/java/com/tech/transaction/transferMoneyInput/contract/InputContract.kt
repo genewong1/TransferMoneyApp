@@ -15,14 +15,14 @@ interface InputContract {
 
     interface Interactor {
         fun initiateTransaction(receivingAccountNumber: BigInteger, amount: BigDecimal)
-        fun isAmountInputValid(amount: String)
+        fun isInputValid(receivingAccountNumber: String, amount: String)
     }
 
-    interface InteractorOutput : TransferRequestCallback, AmountInputValidCallback
+    interface InteractorOutput : TransferRequestCallback, InputValidCallback
 
-    interface AmountInputValidCallback {
-        fun onAmountInputValid()
-        fun onAmountInputInvalid()
+    interface InputValidCallback {
+        fun onInputValid()
+        fun onInputInvalid()
     }
 
     interface TransferRequestCallback {
@@ -32,7 +32,7 @@ interface InputContract {
     }
 
     interface Presenter : InteractorOutput {
-        fun onEtAmountFieldChanged(amount: String)
+        fun onFieldsChanged(receivingAccountNumber: String, amount: String)
         fun onBtnSubmit(receivingAccountNumber: String, amount: String)
     }
 
