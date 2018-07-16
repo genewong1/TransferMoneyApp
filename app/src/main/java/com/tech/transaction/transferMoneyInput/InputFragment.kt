@@ -46,12 +46,13 @@ class InputFragment : Fragment(), InputContract.View {
 
         etAmount.addTextChangedListener(
                 object: TextWatcher {
-                    override fun afterTextChanged(p0: Editable?) {
-                    }
-                    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    }
-                    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                        presenter.onEtAmountFieldChanged(p0.toString())
+                    override fun afterTextChanged(p0: Editable?) {}
+                    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                    override fun onTextChanged(charSequence: CharSequence, p1: Int, p2: Int, p3: Int) {
+                        presenter.onFieldsChanged(
+                                receivingAccountNumber = etReceiverAccountNumber.text.toString(),
+                                amount = charSequence.toString()
+                        )
 
                         //Close InputConnection.
                         //If not, causes
@@ -59,6 +60,19 @@ class InputFragment : Fragment(), InputContract.View {
                         // Attempt to invoke interface method
                         // 'void android.view.inputmethod.InputConnection.closeConnection()'
                         // on a null object reference
+                    }
+                }
+        )
+
+        etReceiverAccountNumber.addTextChangedListener(
+                object: TextWatcher {
+                    override fun afterTextChanged(p0: Editable?) {}
+                    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                        presenter.onFieldsChanged(
+                            receivingAccountNumber = etReceiverAccountNumber.text.toString(),
+                            amount = etAmount.text.toString()
+                        )
                     }
                 }
         )
