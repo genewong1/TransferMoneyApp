@@ -8,6 +8,9 @@ interface InputContract {
     interface View {
         fun setupBtnSubmitClickListener(callback : (receiverAccountNumber: String, strAmount: String)->Unit)
         fun enableBtnSubmit(enable: Boolean)
+
+        fun startProgressBar()
+        fun stopProgressBar()
     }
 
     interface Interactor {
@@ -23,6 +26,7 @@ interface InputContract {
     }
 
     interface TransferRequestCallback {
+        fun onTransferRequestStart()
         fun onTransferRequestComplete(transferMoneyStatus: TransferMoneyStatus)
         fun onTransferRequestError(transferMoneyStatus: TransferMoneyStatus)
     }
