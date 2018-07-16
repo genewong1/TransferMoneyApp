@@ -46,12 +46,19 @@ class InputInteractorImpl @Inject constructor(
                 }
     }
 
-    override fun isAmountInputValid(amount: String) {
-        if (amount.isBlank() || BigDecimal(amount) <= BigDecimal.ZERO) {
-            output.onAmountInputInvalid()
-        } else {
-            output.onAmountInputValid()
-        }
+    private fun isReceivingAccountNumberValid(receivingAccountNumber: String) : Boolean {
+        return receivingAccountNumber.isBlank() || BigInteger(receivingAccountNumber) <= BigInteger.ZERO
+    }
+
+    private fun isAmountValid(amount: String) : Boolean {
+        return amount.isBlank() || BigDecimal(amount) <= BigDecimal.ZERO
+    }
+
+    override fun isInputValid(receivingAccountNumber: String, amount: String) {
+        if (isReceivingAccountNumberValid(receivingAccountNumber) || isAmountValid(amount))
+            output.onInputInvalid()
+        else
+            output.onInputValid()
     }
 
     companion object {
