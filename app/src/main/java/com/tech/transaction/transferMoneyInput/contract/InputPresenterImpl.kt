@@ -49,20 +49,20 @@ class InputPresenterImpl @Inject constructor(
 
     override fun onBtnSubmit(receivingAccountNumber: String, amount: String) {
         interactor.initiateTransaction(
-                receivingAccountNumber = receivingAccountNumber.toBigInteger(),
-                amount = amount.parseCurrencyString()
+            receivingAccountNumber = receivingAccountNumber.toBigInteger(),
+            amount = amount.parseCurrencyString()
         )
     }
 
-    override fun onAmountInputValid() {
+    override fun onInputValid() {
         view.enableBtnSubmit(true)
     }
 
-    override fun onAmountInputInvalid() {
+    override fun onInputInvalid() {
         view.enableBtnSubmit(false)
     }
 
-    override fun onEtAmountFieldChanged(amount: String) {
-        interactor.isAmountInputValid(amount)
+    override fun onFieldsChanged(receivingAccountNumber: String, amount: String) {
+        interactor.isInputValid(receivingAccountNumber = receivingAccountNumber, amount = amount)
     }
 }
