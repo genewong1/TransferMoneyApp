@@ -1,6 +1,7 @@
 package com.tech.transaction.transferMoneyInput
 
 import android.os.Bundle
+import android.support.annotation.UiThread
 import android.support.v4.app.Fragment
 import android.text.Editable
 import android.text.TextWatcher
@@ -80,12 +81,25 @@ class InputFragment : Fragment(), InputContract.View {
         }
     }
 
+    @UiThread
     override fun enableBtnSubmit(enable: Boolean) {
         btnSubmit.isEnabled = enable
     }
 
+    @UiThread
+    override fun startProgressBar() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    @UiThread
+    override fun stopProgressBar() {
+        progressBar.visibility = View.INVISIBLE
+    }
+
     override fun onPause() {
         super.onPause()
+
+        stopProgressBar()
 
         //add etAmount?.clearFocus() to fix InputConnectionWrapper.closeConnection() issue.
         etAmount?.clearFocus()
