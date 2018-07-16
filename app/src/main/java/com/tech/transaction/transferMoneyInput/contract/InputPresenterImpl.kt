@@ -7,7 +7,10 @@ import com.tech.transaction.transferMoneyInput.module.InputInteractorModule
 import com.tech.transaction.typeConversion.parseCurrencyString
 import javax.inject.Inject
 
-class InputPresenterImpl @Inject constructor(private var view: InputContract.View, private var router: InputContract.Router) : InputContract.Presenter {
+class InputPresenterImpl @Inject constructor(
+        private var view: InputContract.View,
+        private var router: InputContract.Router
+) : InputContract.Presenter {
 
     @Inject
     lateinit var interactor: InputContract.Interactor
@@ -30,12 +33,18 @@ class InputPresenterImpl @Inject constructor(private var view: InputContract.Vie
         this.interactor = interactor
     }
 
+    override fun onTransferRequestStart() {
+        view.startProgressBar()
+    }
+
     override fun onTransferRequestComplete(transferMoneyStatus: TransferMoneyStatus) {
         router.goToTransactionResult(transferMoneyStatus = transferMoneyStatus)
+        view.stopProgressBar()
     }
 
     override fun onTransferRequestError(transferMoneyStatus: TransferMoneyStatus) {
         router.goToTransactionResult(transferMoneyStatus = transferMoneyStatus)
+        view.stopProgressBar()
     }
 
     override fun onBtnSubmit(receivingAccountNumber: String, amount: String) {
