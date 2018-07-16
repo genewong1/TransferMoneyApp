@@ -83,7 +83,7 @@ class TransactionInputPresenterUnitTest {
     fun onAmountInputValid_CallsEnableBtnSubmit() {
         presenter = InputPresenterImpl(view, router)
 
-        presenter.onAmountInputValid()
+        presenter.onInputValid()
         verify(view).enableBtnSubmit(true)
     }
 
@@ -91,18 +91,20 @@ class TransactionInputPresenterUnitTest {
     fun onAmountInputInvalid_CallsEnableBtnSubmit() {
         presenter = InputPresenterImpl(view, router)
 
-        presenter.onAmountInputInvalid()
+        presenter.onInputInvalid()
         verify(view).enableBtnSubmit(false)
     }
 
     @Test
     fun onEtAmountFieldChanged_GivenAmount() {
         val amount = "201"
+        val receivingAccountNumber = "1203403022004321"
 
         presenter = InputPresenterImpl(view, router, interactor)
 
-        presenter.onEtAmountFieldChanged(amount)
-        verify(interactor).isAmountInputValid(amount)
+        presenter.onFieldsChanged(receivingAccountNumber, amount)
+
+        verify(interactor).isInputValid(receivingAccountNumber, amount)
     }
 
 }

@@ -29,40 +29,44 @@ class TransactionInputInteractorUnitTest {
     fun isAmountInputValid_givenValidAmount() {
         interactor = InputInteractorImpl(output)
 
+        val receivingAccountNumber = "1022031012398484"
         val amount = "10"
-        interactor.isAmountInputValid(amount = amount)
+        interactor.isInputValid(receivingAccountNumber = receivingAccountNumber, amount = amount)
 
-        verify(output, times(1)).onAmountInputValid()
+        verify(output, times(1)).onInputValid()
     }
 
     @Test
     fun isAmountInputValid_givenInvalidNegativeAmount() {
         interactor = InputInteractorImpl(output)
 
+        val receivingAccountNumber = "302020204949"
         val amount = "-102"
-        interactor.isAmountInputValid(amount = amount)
+        interactor.isInputValid(receivingAccountNumber = receivingAccountNumber, amount = amount)
 
-        verify(output, times(1)).onAmountInputInvalid()
+        verify(output, times(1)).onInputInvalid()
     }
 
     @Test
     fun isAmountInputValid_givenInvalidBlankAmount() {
         interactor = InputInteractorImpl(output)
 
+        val receivingAccountNumber = "20103010"
         val amount = ""
-        interactor.isAmountInputValid(amount = amount)
+        interactor.isInputValid(receivingAccountNumber = receivingAccountNumber, amount = amount)
 
-        verify(output, times(1)).onAmountInputInvalid()
+        verify(output, times(1)).onInputInvalid()
     }
 
     @Test
     fun isAmountInputValid_givenInvalidZeroAmount() {
         interactor = InputInteractorImpl(output)
 
+        val receivingAccountNumber = "1020201"
         val amount = "0"
-        interactor.isAmountInputValid(amount = amount)
+        interactor.isInputValid(receivingAccountNumber = receivingAccountNumber, amount = amount)
 
-        verify(output, times(1)).onAmountInputInvalid()
+        verify(output, times(1)).onInputInvalid()
     }
 
     /**
