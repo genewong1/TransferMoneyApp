@@ -27,6 +27,8 @@ class InputInteractorImpl @Inject constructor(
     }
 
     override fun initiateTransaction(receivingAccountNumber: BigInteger, amount: BigDecimal) {
+        output.onTransferRequestStart()
+
         repository.transferMoney(receivingAccountNumber, amount)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
