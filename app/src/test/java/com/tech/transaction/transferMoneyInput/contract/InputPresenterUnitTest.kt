@@ -10,7 +10,7 @@ import java.math.BigDecimal
 import java.math.BigInteger
 
 
-class TransactionInputPresenterUnitTest {
+class InputPresenterUnitTest {
     @Mock
     private lateinit var view : InputContract.View
 
