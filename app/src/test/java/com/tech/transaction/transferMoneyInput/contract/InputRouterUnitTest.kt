@@ -9,7 +9,7 @@ import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import java.math.BigDecimal
 
-class TransactionInputRouterUnitTest {
+class InputRouterUnitTest {
 
     @Mock
     lateinit var fragmentManager: FragmentManager
