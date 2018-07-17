@@ -10,7 +10,7 @@ import org.mockito.MockitoAnnotations
 import java.math.BigDecimal
 import java.math.BigInteger
 
-class TransactionInputInteractorUnitTest {
+class InputInteractorUnitTest {
 
     @Mock
     lateinit var output: InputContract.InteractorOutput
