@@ -69,6 +69,39 @@ class TransactionInputInteractorUnitTest {
         verify(output, times(1)).onInputInvalid()
     }
 
+    @Test
+    fun isAmountInputValid_givenInvalidZeroAmount_EmptyAccountNumber() {
+        interactor = InputInteractorImpl(output)
+
+        val receivingAccountNumber = ""
+        val amount = "0"
+        interactor.isInputValid(receivingAccountNumber = receivingAccountNumber, amount = amount)
+
+        verify(output, times(1)).onInputInvalid()
+    }
+
+    @Test
+    fun isAmountInputValid_givenValidNonZeroAmount_InvalidAccountNumber() {
+        interactor = InputInteractorImpl(output)
+
+        val receivingAccountNumber = "-1"
+        val amount = "1230"
+        interactor.isInputValid(receivingAccountNumber = receivingAccountNumber, amount = amount)
+
+        verify(output, times(1)).onInputInvalid()
+    }
+
+    @Test
+    fun isAmountInputValid_givenNegativeAmount_InvalidAccountNumber() {
+        interactor = InputInteractorImpl(output)
+
+        val receivingAccountNumber = "-1"
+        val amount = "-1"
+        interactor.isInputValid(receivingAccountNumber = receivingAccountNumber, amount = amount)
+
+        verify(output, times(1)).onInputInvalid()
+    }
+
     /**
      * todo Requires mocking to be testable.
      */
