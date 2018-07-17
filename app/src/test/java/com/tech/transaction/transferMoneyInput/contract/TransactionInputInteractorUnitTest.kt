@@ -26,7 +26,7 @@ class TransactionInputInteractorUnitTest {
     }
 
     @Test
-    fun isAmountInputValid_givenValidAmount() {
+    fun isAmountInputValid_givenValidAmount_ValidReceivingAccountNumber() {
         interactor = InputInteractorImpl(output)
 
         val receivingAccountNumber = "1022031012398484"
