@@ -22,8 +22,8 @@ import java.math.BigInteger
 
 @RunWith(JUnitPlatform::class)
 class TransferMoneyServiceUnitTest : Spek({
-    Scenario("Send Money API call") {
-        Given("Details required for money transfer") {
+    Scenario("Send Money API call Successful!") {
+        Given("Receiving account number and amount required for money transfer") {
 
             val server = MockWebServer()
 
@@ -32,7 +32,7 @@ class TransferMoneyServiceUnitTest : Spek({
 
             server.start()
 
-            val baseUrl: HttpUrl = server.url("/") //"http://www.mocky.io/v2/5b44ba0e2f00007000420a35/")
+            val baseUrl: HttpUrl = server.url("/")
 
             val retrofit: Retrofit = Retrofit.Builder()
                     .addConverterFactory(GsonConverterFactory.create())
@@ -40,16 +40,16 @@ class TransferMoneyServiceUnitTest : Spek({
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .build()
 
-            val service : TransferMoneyService = retrofit.create(TransferMoneyService::class.java)
+            val service: TransferMoneyService = retrofit.create(TransferMoneyService::class.java)
 
             val receivingAccountNumber = BigInteger("19219022")
             val amount = BigDecimal("912111")
 
             val callObservable = service.sendMoney(
-                TransferMoneyOutDto(
-                    receivingAccountNumber = receivingAccountNumber,
-                    amount = amount
-                )
+                    TransferMoneyOutDto(
+                            receivingAccountNumber = receivingAccountNumber,
+                            amount = amount
+                    )
             )
 
             When("Call") {
@@ -67,46 +67,47 @@ class TransferMoneyServiceUnitTest : Spek({
             }
         }
 
-        Given("Server return") {
+        Scenario("Send Money API call Unsuccessful!") {
+            Given("Receiving account number and amount required for money transfer") {
+                val server = MockWebServer()
 
-            val server = MockWebServer()
+                val body = "{\"success\":false}"
+                server.enqueue(MockResponse().setBody(body))
 
-            val body = "{\"success\":false}"
-            server.enqueue(MockResponse().setBody(body))
+                server.start()
 
-            server.start()
+                val baseUrl: HttpUrl = server.url("/")
 
-            val baseUrl: HttpUrl = server.url("/") //"http://www.mocky.io/v2/5b44ba0e2f00007000420a35/")
+                val retrofit: Retrofit = Retrofit.Builder()
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .baseUrl(baseUrl)
+                        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                        .build()
 
-            val retrofit: Retrofit = Retrofit.Builder()
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl(baseUrl)
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                    .build()
+                val service: TransferMoneyService = retrofit.create(TransferMoneyService::class.java)
 
-            val service : TransferMoneyService = retrofit.create(TransferMoneyService::class.java)
+                val receivingAccountNumber = BigInteger("19219022")
+                val amount = BigDecimal("912111")
 
-            val receivingAccountNumber = BigInteger("19219022")
-            val amount = BigDecimal("912111")
-
-            val callObservable = service.sendMoney(
-                TransferMoneyOutDto(
-                    receivingAccountNumber = receivingAccountNumber,
-                    amount = amount
+                val callObservable = service.sendMoney(
+                        TransferMoneyOutDto(
+                                receivingAccountNumber = receivingAccountNumber,
+                                amount = amount
+                        )
                 )
-            )
 
-            When("Call") {
-                Then("Receive result - unsuccessful status") {
+                When("Call") {
+                    Then("Receive result - unsuccessful status") {
 
-                    callObservable.test().assertValue(TransferMoneyInDto(false))
+                        callObservable.test().assertValue(TransferMoneyInDto(false))
 
-                    val request = server.takeRequest()
-                    assertNull(request.getHeader("Authorization"))
-                    assertEquals("/transfer", request.path)
+                        val request = server.takeRequest()
+                        assertNull(request.getHeader("Authorization"))
+                        assertEquals("/transfer", request.path)
 
-                    server.shutdown()
+                        server.shutdown()
 
+                    }
                 }
             }
         }
