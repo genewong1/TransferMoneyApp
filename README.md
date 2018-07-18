@@ -38,3 +38,9 @@
 2. RxAndroid, RxJava - Make API calls reactive.
 3. Retrofit2, OkHttp3 - API calls.
 4. Mockito - mocking objects for unit testing.
+
+
+## Task Management
+
+Trello, a basic task manager, was used to organize tasks.
+https://trello.com/b/NxYXTzIi/tasks
