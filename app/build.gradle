@@ -30,6 +30,11 @@ ext {
     retrofitVersion='2.4.0'
 }
 
+repositories {
+    maven { url "http://dl.bintray.com/jetbrains/spek" }
+    maven { url 'https://dl.bintray.com/rozkminiacz/SpekBDD/' }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
@@ -63,6 +68,20 @@ dependencies {
     testImplementation "org.powermock:powermock-api-mockito:1.6.4"
     testImplementation "org.powermock:powermock-classloading-xstream:1.6.4"
 
+    //Mock Web Server
+    testImplementation 'com.squareup.okhttp3:mockwebserver:3.11.0'
+
+    //Spek (specification & testing library by Jetbrains for Kotlin)
+    testCompile 'org.jetbrains.spek:spek-api:1.1.5'
+    testCompile 'org.jetbrains.spek:spek-junit-platform-engine:1.1.5'
+
     // Android Unit Tests
     androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
+
+    //JUnit Platform (required by Spek)
+    testCompile 'org.junit.platform:junit-platform-runner:1.0.0'
+
+    //Spek BDD
+    testCompile 'me.rozkmin.spekbdd:spek-bdd:1.1'
+
 }

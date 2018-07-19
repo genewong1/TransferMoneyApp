@@ -40,8 +40,31 @@
     android:hint="@string/Amount"
     android:accessibilityHeading="true"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.503"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/btnSubmit" />
+
+<EditText
+    android:id="@+id/etReceiverAccountNumber"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:inputType="number"
+    android:hint="@string/Receiver_Account_Number"
+    android:accessibilityHeading="true"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/etAmount"
+    app:layout_constraintVertical_bias="0.4"
+    app:layout_constraintBottom_toBottomOf="parent" />
+
+<ProgressBar
+    android:id="@+id/progressBar"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@+id/btnSubmit"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:visibility="invisible"/>
 
 </android.support.constraint.ConstraintLayout>

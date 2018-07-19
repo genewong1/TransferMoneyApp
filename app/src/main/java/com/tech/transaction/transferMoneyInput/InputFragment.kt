@@ -1,6 +1,7 @@
 package com.tech.transaction.transferMoneyInput
 
 import android.os.Bundle
+import android.support.annotation.UiThread
 import android.support.v4.app.Fragment
 import android.text.Editable
 import android.text.TextWatcher
@@ -45,12 +46,13 @@ class InputFragment : Fragment(), InputContract.View {
 
         etAmount.addTextChangedListener(
                 object: TextWatcher {
-                    override fun afterTextChanged(p0: Editable?) {
-                    }
-                    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    }
-                    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                        presenter.onEtAmountFieldChanged(p0.toString())
+                    override fun afterTextChanged(p0: Editable?) {}
+                    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                    override fun onTextChanged(charSequence: CharSequence, p1: Int, p2: Int, p3: Int) {
+                        presenter.onFieldsChanged(
+                                receivingAccountNumber = etReceiverAccountNumber.text.toString(),
+                                amount = charSequence.toString()
+                        )
 
                         //Close InputConnection.
                         //If not, causes
@@ -62,30 +64,56 @@ class InputFragment : Fragment(), InputContract.View {
                 }
         )
 
+        etReceiverAccountNumber.addTextChangedListener(
+                object: TextWatcher {
+                    override fun afterTextChanged(p0: Editable?) {}
+                    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                        presenter.onFieldsChanged(
+                            receivingAccountNumber = etReceiverAccountNumber.text.toString(),
+                            amount = etAmount.text.toString()
+                        )
+                    }
+                }
+        )
+
         btnSubmit.isEnabled = true
 
-        setupBtnSubmitClickListener({ strAmount ->
+        setupBtnSubmitClickListener({receiverAccountNumber, strAmount ->
             btnSubmit.isEnabled = false
 
             //add etAmount?.clearFocus() to fix InputConnectionWrapper.closeConnection() issue.
             etAmount?.clearFocus()
-            presenter.onBtnSubmit(strAmount)
+            presenter.onBtnSubmit(receiverAccountNumber, strAmount)
         })
 
     }
 
-    override fun setupBtnSubmitClickListener(callback : (strAmount: String)->Unit) {
+    override fun setupBtnSubmitClickListener(callback : (receiverAccountNumber: String, strAmount: String)->Unit) {
         btnSubmit.setOnClickListener {
-            callback(etAmount.text.toString())
+            callback(etReceiverAccountNumber.text.toString(), etAmount.text.toString())
         }
     }
 
+    @UiThread
     override fun enableBtnSubmit(enable: Boolean) {
         btnSubmit.isEnabled = enable
     }
 
+    @UiThread
+    override fun startProgressBar() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    @UiThread
+    override fun stopProgressBar() {
+        progressBar.visibility = View.INVISIBLE
+    }
+
     override fun onPause() {
         super.onPause()
+
+        stopProgressBar()
 
         //add etAmount?.clearFocus() to fix InputConnectionWrapper.closeConnection() issue.
         etAmount?.clearFocus()

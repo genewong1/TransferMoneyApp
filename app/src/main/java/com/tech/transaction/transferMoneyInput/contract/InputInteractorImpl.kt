@@ -8,6 +8,7 @@ import com.tech.transaction.entities.TransferMoneyStatus.TransferMoneyStatus
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import java.math.BigDecimal
+import java.math.BigInteger
 import javax.inject.Inject
 
 class InputInteractorImpl @Inject constructor(
@@ -25,8 +26,10 @@ class InputInteractorImpl @Inject constructor(
                 .inject(this@InputInteractorImpl)
     }
 
-    override fun initiateTransaction(amount: BigDecimal) {
-        repository.transferMoney(amount)
+    override fun initiateTransaction(receivingAccountNumber: BigInteger, amount: BigDecimal) {
+        output.onTransferRequestStart()
+
+        repository.transferMoney(receivingAccountNumber, amount)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError {
@@ -43,12 +46,19 @@ class InputInteractorImpl @Inject constructor(
                 }
     }
 
-    override fun isAmountInputValid(amount: String) {
-        if (amount.isBlank() || BigDecimal(amount) <= BigDecimal.ZERO) {
-            output.onAmountInputInvalid()
-        } else {
-            output.onAmountInputValid()
-        }
+    private fun isReceivingAccountNumberValid(receivingAccountNumber: String) : Boolean {
+        return receivingAccountNumber.isBlank() || BigInteger(receivingAccountNumber) <= BigInteger.ZERO
+    }
+
+    private fun isAmountValid(amount: String) : Boolean {
+        return amount.isBlank() || BigDecimal(amount) <= BigDecimal.ZERO
+    }
+
+    override fun isInputValid(receivingAccountNumber: String, amount: String) {
+        if (isReceivingAccountNumberValid(receivingAccountNumber) || isAmountValid(amount))
+            output.onInputInvalid()
+        else
+            output.onInputValid()
     }
 
     companion object {

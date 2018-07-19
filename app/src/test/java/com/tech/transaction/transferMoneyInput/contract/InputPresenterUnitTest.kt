@@ -7,9 +7,10 @@ import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import java.math.BigDecimal
+import java.math.BigInteger
 
 
-class TransactionInputPresenterUnitTest {
+class InputPresenterUnitTest {
     @Mock
     private lateinit var view : InputContract.View
 
@@ -34,12 +35,14 @@ class TransactionInputPresenterUnitTest {
     fun onBtnSubmit_CallsInitiateTransaction() {
         val strAmount = "201"
         val bdAmount = BigDecimal("201")
+        val receivingAccountNumber: BigInteger = BigInteger("1234542112346543")
+        val strReceivingAccountNumber = "1234542112346543"
 
         presenter = InputPresenterImpl(view, router, interactor)
 
-        presenter.onBtnSubmit(strAmount)
+        presenter.onBtnSubmit(strReceivingAccountNumber, strAmount)
 
-        verify(interactor).initiateTransaction(bdAmount)
+        verify(interactor).initiateTransaction(receivingAccountNumber, bdAmount)
 
     }
 
@@ -80,7 +83,7 @@ class TransactionInputPresenterUnitTest {
     fun onAmountInputValid_CallsEnableBtnSubmit() {
         presenter = InputPresenterImpl(view, router)
 
-        presenter.onAmountInputValid()
+        presenter.onInputValid()
         verify(view).enableBtnSubmit(true)
     }
 
@@ -88,18 +91,20 @@ class TransactionInputPresenterUnitTest {
     fun onAmountInputInvalid_CallsEnableBtnSubmit() {
         presenter = InputPresenterImpl(view, router)
 
-        presenter.onAmountInputInvalid()
+        presenter.onInputInvalid()
         verify(view).enableBtnSubmit(false)
     }
 
     @Test
     fun onEtAmountFieldChanged_GivenAmount() {
         val amount = "201"
+        val receivingAccountNumber = "1203403022004321"
 
         presenter = InputPresenterImpl(view, router, interactor)
 
-        presenter.onEtAmountFieldChanged(amount)
-        verify(interactor).isAmountInputValid(amount)
+        presenter.onFieldsChanged(receivingAccountNumber, amount)
+
+        verify(interactor).isInputValid(receivingAccountNumber, amount)
     }
 
 }
