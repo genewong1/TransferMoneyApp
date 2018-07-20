@@ -4,6 +4,6 @@ import java.math.BigDecimal
 import java.math.BigInteger
 
 class TransferMoneyOutDto(
-        private val receivingAccountNumber: BigInteger,
-        private val amount: BigDecimal
+        val receivingAccountNumber: BigInteger,
+        val amount: BigDecimal
 )
