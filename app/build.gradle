@@ -79,9 +79,12 @@ dependencies {
     androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
 
     //JUnit Platform (required by Spek)
-    testCompile 'org.junit.platform:junit-platform-runner:1.0.0'
+    testImplementation 'org.junit.platform:junit-platform-runner:1.0.0'
 
     //Spek BDD
-    testCompile 'me.rozkmin.spekbdd:spek-bdd:1.1'
+    testImplementation 'me.rozkmin.spekbdd:spek-bdd:1.1'
+
+    //Mockito customized for Kotlin
+    testImplementation 'com.nhaarman:mockito-kotlin:1.6.0'
 
 }
