@@ -22,7 +22,6 @@ class InputRouterUnitTest {
     @Test(expected=NullPointerException::class)
     fun goToTransactionResult() {
         //Given status: TransferMoneyStatus, go to transaction result.
-
         val router = InputRouterImpl(fragmentManager)
 
         router.goToTransactionResult(TransferMoneyStatus(true, BigDecimal.ONE))

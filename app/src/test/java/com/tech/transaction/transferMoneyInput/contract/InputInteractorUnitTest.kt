@@ -113,6 +113,7 @@ class InputInteractorUnitTest {
         val amount = "320"
         interactor.initiateTransaction(receivingAccountNumber, BigDecimal(amount))
 
+        //mocking/comparing this TransferMoneyStatus.
         verify(output, times(1))
         .onTransferRequestComplete(transferMoneyStatus =
             TransferMoneyStatus(
