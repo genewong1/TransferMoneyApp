@@ -7,7 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tech.transaction.R
+import com.tech.transaction.data.KParcelable
 import com.tech.transaction.entities.TransferMoneyStatus.TransferMoneyStatus
+import com.tech.transaction.fragmentUtil.argument
+import com.tech.transaction.fragmentUtil.withArguments
 import com.tech.transaction.transferMoneyResult.component.DaggerResultComponent
 import com.tech.transaction.transferMoneyResult.contract.ResultContract
 import com.tech.transaction.transferMoneyResult.module.ResultPresenterModule
@@ -28,7 +31,7 @@ class ResultFragment : Fragment(), ResultContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val transactionStatus = this.arguments?.getParcelable<TransferMoneyStatus>(KEY_TRANSACTION_STATUS)
+        val transactionStatus : TransferMoneyStatus by argument<TransferMoneyStatus>(KEY_TRANSACTION_STATUS)
                 ?: throw IllegalArgumentException("Parcelable KEY_TRANSACTION_STATUS expected")
 
         DaggerResultComponent.builder()
@@ -49,13 +52,7 @@ class ResultFragment : Fragment(), ResultContract.View {
         const val KEY_TRANSACTION_STATUS = "TRANSACTION_STATUS"
 
         fun newInstance(transferMoneyStatus: TransferMoneyStatus) : ResultFragment {
-            val transactionResultFragment = ResultFragment()
-
-            val bundle = Bundle()
-            bundle.putParcelable(ResultFragment.KEY_TRANSACTION_STATUS, transferMoneyStatus)
-            transactionResultFragment.arguments = bundle
-
-            return transactionResultFragment
+            return ResultFragment().withArguments(KEY_TRANSACTION_STATUS to transferMoneyStatus as KParcelable)
         }
     }
 }
